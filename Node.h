@@ -1,6 +1,3 @@
-//
-// Created by Brady Cash on 11/8/21.
-//
 
 #ifndef INC_1337PROJECT4_NODE_H
 #define INC_1337PROJECT4_NODE_H
