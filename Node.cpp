@@ -1,6 +1,3 @@
-//
-// Created by Brady Cash on 11/8/21.
-// BPC210000
 
 #include "Node.h"
 #include <iostream>
