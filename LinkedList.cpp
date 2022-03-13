@@ -13,16 +13,16 @@ LinkedList::LinkedList() {
 
 LinkedList::LinkedList(const LinkedList& sourceList) {
     
-   //std::cout << "Copy constructor called\n";
     if (sourceList.Head == nullptr) {   //if source list is empty
         return;
     }
+    
     Node* sourceHead = sourceList.Head;     //A copy of the source list head used for traversal
-    Head = new Node;    //allocate a new node in memory
-    Head->setCoef(sourceHead->getCoef());    //assign head Coeficient to sourceHeads
+    Head = new Node;                        //allocate a new node in memory
+    Head->setCoef(sourceHead->getCoef());   //assign head Coeficient to sourceHeads
     Head->setExp(sourceHead->getExp());     //Basically same, but this time with exponents
-    Head->setNext(nullptr);         //Set next to nullptr as we will fill this inside the loop
-    Node* curr = Head;      //create a node named curr to use when making a copy
+    Head->setNext(nullptr);                 //Set next to nullptr as we will fill this inside the loop
+    Node* curr = Head;                      //create a node named curr to use when making a copy
     
     //move sourceHead to it's next node since we just copied the first
     sourceHead = sourceHead->getNext();
@@ -52,7 +52,7 @@ void LinkedList::operator+=(Node *node1) {
     {
         if (tempNode->getNext() == nullptr) {   
             tempNode->setNext(node1);       //point next of last node to the new node
-            setLength(Length + 1);    //increment the length since we just added a new node
+            setLength(Length + 1);          //increment the length since we just added a new node
             break;
         }
         tempNode = tempNode->getNext();
@@ -73,8 +73,8 @@ Node *LinkedList::merge(Node *node1, Node *node2) {
     //compare the value
     if (node1->getExp() > node2->getExp())
     {
-        newNode = node1;    //assign the newnode to the Node that contains a greater value
-        newNode->setNext(merge(node1->getNext(), node2)); //recursive call to get next node
+        newNode = node1;                                    //assign the newnode to the Node that contains a greater value
+        newNode->setNext(merge(node1->getNext(), node2));   //recursive call to get next node
     } else
     {
         newNode = node2;
@@ -88,20 +88,19 @@ void LinkedList::sortHelper(Node *&head) {
     if(head->getNext() != nullptr)		//check if at last node
     {
         Node* head1;
-        Node* head2 = head;            //assign head to head 2. Head 2 will point to second half of the linked list
+        Node* head2 = head;             //assign head to head 2. Head 2 will point to second half of the linked list
         int len = listLength(head);
         //list2->setHead(head2);
-        for(int i=0; i<len/2;i++)	//use for loop to increment the pointer 2 to the mid-position
+        for(int i=0; i<len/2;i++)	    //use for loop to increment the pointer 2 to the mid-position
         {
-            head1 = head2;			//assign head1 to any node head2 points to
+            head1 = head2;			    //assign head1 to any node head2 points to
             head2 = head2->getNext();	//in order to put NULL terminate for the first half of the linked list
         }
-        //list2.setHead(head2);
+
         head1->setNext(nullptr);		//end first half of the linked list
         head1 = head;
-        //list1.setHead(head1);
-        sortHelper(head1);    //recursive call 
-        sortHelper(head2);    //recursive call
+        sortHelper(head1);            //recursive call 
+        sortHelper(head2);            //recursive call
         head = merge(head1, head2);   //head's the sorted list 
     }
 }
@@ -125,7 +124,6 @@ void LinkedList::sortList() {
 Node *LinkedList::operator[](int pos) {
     //if position you are searching for is greater than length
     if (pos > Length-1) {
-        //std::cout << "Node doesn't exist" << std::endl;
         return nullptr;
     } 
     else if (pos < 0){  //check if user entered a negative position
@@ -143,7 +141,6 @@ Node *LinkedList::operator[](int pos) {
             }
         }//end of traversal loop
     }
-    //std::cout << "Node doesn't exist" << std::endl;
     return nullptr;     //return nullptr if we reach the end of the end of list and haven't found the position
 }
 
@@ -155,10 +152,10 @@ std::ostream &operator<<(std::ostream &stream, LinkedList source) {
         stream << source[i];
         if (source[i]->getNext() != nullptr && source[i+1]->getCoef() < 0)  //check if the next number is negative
         {
-            stream << " - ";    //input a minus sign into stream before it
+            stream << " - ";                    //input a minus sign into stream before it
         } 
         else if (source[i]->getNext() != nullptr && source[i+1]->getCoef() > 0) //check if the next number is positive
-            stream << " + ";        //input a plus sign before it into stream
+            stream << " + ";                    //input a plus sign before it into stream
     }
     return stream;
 }
@@ -167,13 +164,13 @@ void LinkedList::deconstruct(Node* node)
 {
     if (node == nullptr)
         return;
-    Node* curr = node;   //hold the first node of the linked list
+    Node* curr = node;              //hold the first node of the linked list
     Node* temp = curr->getNext();;  //hold node after first node of list
     curr->setNext(nullptr);
     deconstruct(temp);
 }
 
-LinkedList::~LinkedList() {
+LinkedList::~LinkedList() {         //deconstructor, calls recursvie deconstructor helper function
     deconstruct(Head);
 }
 
