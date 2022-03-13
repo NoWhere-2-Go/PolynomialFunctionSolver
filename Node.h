@@ -29,4 +29,4 @@ public:
 };//end of Node.h
 
 
-#endif //INC_1337PROJECT4_NODE_H
+#endif
