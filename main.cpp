@@ -1,5 +1,3 @@
-//Created by Brady Cash
-//NetID: Bpc210000
 #include <iostream>
 #include "Node.h"
 #include "LinkedList.h"
